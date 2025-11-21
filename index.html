@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <title>News Lite</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="app-header hairline-b">
+      <h1 class="logo">News Lite</h1>
+      <div class="device-info">
+        <span id="dpr"></span>
+        <span id="vw"></span>
+      </div>
+    </header>
+
+    <nav class="tabs hairline-b">
+      <button class="tab active" data-cat="top">头条</button>
+      <button class="tab" data-cat="tech">科技</button>
+      <button class="tab" data-cat="sports">体育</button>
+    </nav>
+
+    <main id="list" class="list"></main>
+
+    <footer class="app-footer hairline-t">
+      <button id="refresh" class="refresh">刷新</button>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,59 @@
+/* Reset：移动端基础重置，关闭高亮与统一盒模型 */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; }
+img { display: block; max-width: 100%; height: auto; }
+button { font: inherit; border: none; background: none; padding: 0; }
+
+/* Typography & palette：设计令牌，统一色彩与文字 */
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --line: #eaeaea;
+  --brand: #0a84ff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Header：顶部吸附 + 设备信息观察 DPR 与 vw */
+.app-header { position: sticky; top: 0; background: #fff; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1rem; }
+.logo { font-size: 1.1rem; margin: 0; }
+.device-info { font-size: 0.8rem; color: var(--muted); display: flex; gap: 0.8rem; }
+
+/* Tabs：粘性定位依赖 --header-h 防止与头部重叠 */
+.tabs { display: flex; gap: 0.6rem; padding: 0.6rem 1rem; position: sticky; top: var(--header-h, 3.4rem); background: #fff; z-index: 90; }
+.tab { padding: 0.45rem 0.7rem; border-radius: 999px; color: var(--muted); }
+.tab.active { background: rgba(10,132,255,0.12); color: var(--brand); }
+
+/* List：内容区底部叠加安全区，避免被系统手势覆盖 */
+.list { padding: 0.6rem 1rem calc(4rem + env(safe-area-inset-bottom)); }
+.card { display: grid; grid-template-columns: 1fr 1.2fr; gap: 0.8rem; padding: 0.9rem 0; }
+.card:not(:last-child) { border-bottom: 0.5px solid var(--line); }
+.card .title { font-size: 0.95rem; margin: 0 0 0.3rem; }
+.card .meta { font-size: 0.85rem; color: var(--muted); }
+.card .thumb { width: 100%; border-radius: 0.6rem; overflow: hidden; }
+
+/* Footer：固定底部 + 安全区内边距 */
+.app-footer { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; padding: 0.6rem 1rem; padding-bottom: calc(0.6rem + env(safe-area-inset-bottom)); display: flex; justify-content: center; }
+.refresh { background: var(--brand); color: #fff; padding: 0.5rem 0.9rem; border-radius: 0.5rem; }
+
+/* Hairline：高 DPR 支持 0.5px 分隔线，低 DPR 用 transform 压缩 1px */
+.hairline-b { border-bottom: 0.5px solid var(--line); }
+.hairline-t { border-top: 0.5px solid var(--line); }
+
+/* Hairline 回退：旧浏览器不支持 0.5px 时的替代方案 */
+.hairline-fallback { position: relative; }
+.hairline-fallback::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--line); transform-origin: 50% 100%; transform: scaleY(0.5); }
+
+/* Small screens：窄屏单列，改善可读性 */
+@media (max-width: 480px) {
+  .card { grid-template-columns: 1fr; }
+}
+
+.app-header { padding-top: env(safe-area-inset-top); }
